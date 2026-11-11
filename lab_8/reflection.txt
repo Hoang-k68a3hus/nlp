@@ -1,0 +1,15 @@
+trong thực tế người ta hầu như không bắt đầu bằng việc train Transformer từ đầu.
+
+Lý do đầu tiên là data. Transformer có rất nhiều tham số, nên cần một lượng dữ liệu khổng lồ để học được ngữ pháp, ngữ nghĩa và quan hệ giữa các từ trong ngữ cảnh. Ngay cả khi bài toán chỉ thuộc một lĩnh vực hẹp như AI y tế, mô hình cũng không thể chỉ học từ dữ liệu y tế. Nó vẫn phải hiểu một câu có nghĩa gì, và hiểu biết đó chỉ có được khi học từ dữ liệu nhiều domain. Trong khi đó, dữ liệu chuyên ngành như y tế rất khó thu thập: số lượng ít, cần chuyên gia gán nhãn, lại bị ràng buộc về quyền riêng tư.
+
+Đây chính là giá trị của pretrained representation. Các mô hình pretrained được huấn luyện trên lượng văn bản rất lớn thuộc nhiều lĩnh vực, nên đã học được biểu diễn tổng quát của ngôn ngữ. Biểu diễn này có thể tái sử dụng cho nhiều bài toán khác nhau thay vì học lại từ con số không.
+
+Yếu tố thứ ba là computational cost. Vì dữ liệu pretrain cực lớn, việc train từ đầu tốn rất nhiều GPU/TPU, thời gian và chi phí hạ tầng. Với phần lớn cá nhân, nhóm nghiên cứu hay doanh nghiệp vừa và nhỏ, điều này gần như không khả thi.
+
+Vì thế, với các downstream task như phân loại văn bản, nhận diện thực thể hay hỏi đáp y tế, cách làm phổ biến là fine-tuning: lấy mô hình pretrained rồi huấn luyện tiếp trên dữ liệu của bài toán. Ta có thể cập nhật toàn bộ tham số, hoặc chỉ một phần (đóng băng các layer dưới, chỉ train layer cuối hoặc dùng các phương pháp như LoRA). Cách này cần ít dữ liệu hơn, train nhanh hơn mà kết quả vẫn cao.
+
+Tuy nhiên, hướng này có limitation. Trước hết, ta phụ thuộc vào mô hình của người khác, bao gồm kiến trúc, tokenizer, giấy phép và cả những bias mà mô hình đã học. Ngoài ra còn có domain shift: nếu domain đích khác xa dữ liệu pretrain (ví dụ văn bản y khoa tiếng Việt hay ngôn ngữ ít tài nguyên), biểu diễn có sẵn có thể không phù hợp và hiệu năng giảm. Khi đó cần thêm bước pretrain tiếp trên dữ liệu domain trước khi fine-tune.
+
+Dù vậy, train từ đầu vẫn có chỗ đứng. Nó phù hợp với các tổ chức lớn có nguồn lực dồi dào và muốn tự chủ công nghệ, hoặc với những bài toán đặc thù mà chưa có mô hình nào phù hợp để kế thừa.
+
+Tóm lại, pretrain rồi fine-tune là lựa chọn hợp lý về dữ liệu, chi phí và hiệu quả cho đa số trường hợp. Train từ đầu chỉ nên dùng khi có đủ nguồn lực hoặc khi không còn lựa chọn nào khác.
