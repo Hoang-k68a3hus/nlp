@@ -1,0 +1,9 @@
+# 32. Reflection — Từ encoder đến nhãn dự đoán
+
+Cùng một pretrained Transformer có thể dùng cho sequence classification và token classification vì encoder tạo ra biểu diễn theo ngữ cảnh ở từng vị trí của chuỗi. Sau khi token hóa, BERT trả về một dãy vector tương ứng với các vị trí đầu vào, trong đó có token đặc biệt `[CLS]`. Qua self-attention, mỗi vector mang thông tin từ các vị trí khác trong câu. Prediction head quyết định lấy vector nào và chuyển nó thành nhãn ở cấp nào.
+
+Trong sequence classification, head lấy vector cuối của `[CLS]`, hoặc biểu diễn qua tầng pooling của vector này, để dự đoán một nhãn cho cả chuỗi. Ví dụ, khi phân loại cảm xúc của câu “The service was slow but the food was excellent”, đầu ra có thể là nhãn `positive`. Loss được tính từ nhãn của câu. Trong token classification, head áp dụng cùng một lớp tuyến tính lên vector của từng vị trí. Với câu “Elon Musk founded SpaceX”, mô hình có thể dự đoán `B-PER`, `I-PER`, `O` và `B-ORG` tương ứng với bốn từ. Các nhãn BIO cho phép ghép hai từ đầu thành một thực thể người.
+
+Thách thức khi huấn luyện NER là nhãn trong dữ liệu thường nằm ở cấp từ, còn BERT xử lý subword. Trong LAB 09, Strategy A gán nhãn của mỗi từ cho subword đầu tiên và dùng `-100` ở những vị trí bỏ qua khi tính loss. Cách này xác định rõ vị trí nào nhận tín hiệu huấn luyện. Khi đánh giá ở cấp thực thể, dự đoán phải khớp cả loại lẫn ranh giới. Nếu chỉ lấy “Musk” từ “Elon Musk”, mô hình đã nhận ra một phần tên nhưng vẫn bỏ sót span đầy đủ.
+
+Trên cùng tập test CoNLL-2003, entity-level F1 của baseline là 61,91%, còn BERT Tiny đạt 77,18%. Kết quả cho thấy mô hình dùng encoder theo ngữ cảnh và token head hoạt động tốt hơn baseline trong thiết lập này. Hai tác vụ có thể bắt đầu từ cùng một checkpoint pretrained, sau đó dùng head, nhãn và loss phù hợp với đầu ra của từng bài toán. Trong quá trình fine-tuning, gradient có thể cập nhật cả encoder lẫn head để biểu diễn thích nghi với nhiệm vụ.
