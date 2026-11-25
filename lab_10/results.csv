@@ -1,0 +1,30 @@
+section,experiment,model,group,split,profile,n,max_length,train_windows,validation_windows,optimizer_steps,test_windows,test_gold_coverage,best_epoch,em,f1,test_loss,train_seconds,epoch,train_loss,validation_loss,changed_from_high,mean_lexical_overlap,count
+14,context_length,BERT-Tiny,128,test,quick,1200,128.000000,10273.000000,1544.000000,966.000000,3066.000000,100.000000,3.000000,18.250000,29.195752,2.517764,140.969799,,,,,,
+14,context_length,BERT-Tiny,256,test,quick,1200,256.000000,4645.000000,674.000000,438.000000,1337.000000,100.000000,3.000000,19.333333,30.007435,3.290687,129.824255,,,,,,
+14,context_length,BERT-Tiny,384,test,quick,1200,384.000000,4248.000000,619.000000,399.000000,1211.000000,100.000000,3.000000,19.166667,30.652661,3.338696,177.696938,,,,,,
+17,learning_curve,BERT-Tiny,128,validation,quick,600,128.000000,,,,,,,13.666667,23.385828,,48.054964,1.000000,2.796216,2.412818,,,
+17,learning_curve,BERT-Tiny,128,validation,quick,600,128.000000,,,,,,,17.000000,27.412951,,46.339498,2.000000,2.130459,2.381266,,,
+17,learning_curve,BERT-Tiny,128,validation,quick,600,128.000000,,,,,,,18.333333,29.449213,,46.575337,3.000000,1.693060,2.517549,,,
+17,learning_curve,BERT-Tiny,256,validation,quick,600,256.000000,,,,,,,6.000000,14.275457,,46.316287,1.000000,4.094801,3.713814,,,
+17,learning_curve,BERT-Tiny,256,validation,quick,600,256.000000,,,,,,,15.666667,25.796924,,42.413636,2.000000,3.420607,3.370974,,,
+17,learning_curve,BERT-Tiny,256,validation,quick,600,256.000000,,,,,,,17.833333,27.499980,,41.094332,3.000000,2.825175,3.423568,,,
+17,learning_curve,BERT-Tiny,384,validation,quick,600,384.000000,,,,,,,4.333333,12.493198,,60.045439,1.000000,4.202066,3.944290,,,
+17,learning_curve,BERT-Tiny,384,validation,quick,600,384.000000,,,,,,,14.333333,24.359116,,58.664738,2.000000,3.567734,3.586760,,,
+17,learning_curve,BERT-Tiny,384,validation,quick,600,384.000000,,,,,,,17.166667,27.074822,,58.986761,3.000000,2.983728,3.487083,,,
+20,em_vs_f1,Keyword baseline,all,test,quick,1200,,,,,,,,18.333333,22.720627,,,,,,,,
+20,em_vs_f1,BERT-Tiny fine-tuned,all,test,quick,1200,,,,,,,,19.166667,30.652661,,,,,,,,
+22,question_context,BERT-Tiny fine-tuned,high_overlap,paired_diagnostic,quick,12,,,,,,,,50.000000,68.922559,,,,,,0.000000,0.837302,
+22,question_context,BERT-Tiny fine-tuned,low_overlap,paired_diagnostic,quick,12,,,,,,,,41.666667,54.675926,,,,,,8.000000,0.000000,
+22,question_context,BERT-Tiny fine-tuned,distractor,paired_diagnostic,quick,12,,,,,,,,8.333333,24.692096,,,,,,10.000000,,
+22,question_context,BERT-Tiny fine-tuned,reordered,paired_diagnostic,quick,12,,,,,,,,25.000000,57.962963,,,,,,6.000000,,
+23,answer_length,BERT-Tiny fine-tuned,1,test,quick,425,,,,,,,,25.411765,31.246756,,,,,,,,
+23,answer_length,BERT-Tiny fine-tuned,2–3,test,quick,536,,,,,,,,18.283582,31.134015,,,,,,,,
+23,answer_length,BERT-Tiny fine-tuned,4–6,test,quick,163,,,,,,,,11.042945,30.226957,,,,,,,,
+23,answer_length,BERT-Tiny fine-tuned,7+,test,quick,76,,,,,,,,7.894737,24.848635,,,,,,,,
+25,character_boundary,BERT-Tiny fine-tuned,wrong_start_only,test_em_0,quick,970,,,,,,,,,,,,,,,,,114.000000
+25,character_boundary,BERT-Tiny fine-tuned,wrong_end_only,test_em_0,quick,970,,,,,,,,,,,,,,,,,104.000000
+25,character_boundary,BERT-Tiny fine-tuned,wrong_both,test_em_0,quick,970,,,,,,,,,,,,,,,,,752.000000
+25,character_boundary,BERT-Tiny fine-tuned,all_wrong_start,test_em_0,quick,970,,,,,,,,,,,,,,,,,866.000000
+25,character_boundary,BERT-Tiny fine-tuned,all_wrong_end,test_em_0,quick,970,,,,,,,,,,,,,,,,,856.000000
+25,character_boundary,BERT-Tiny fine-tuned,all_wrong_start,test,quick,1200,,,,,,,,,,,,,,,,,872.000000
+25,character_boundary,BERT-Tiny fine-tuned,all_wrong_end,test,quick,1200,,,,,,,,,,,,,,,,,861.000000
